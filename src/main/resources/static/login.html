@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login</title>
+
+<style>
+
+/* ===== BODY ===== */
+body{
+font-family: 'Segoe UI', Arial, sans-serif;
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background: linear-gradient(135deg,#4facfe,#00f2fe);
+}
+
+/* ===== CARD ===== */
+.card{
+background: rgba(255,255,255,0.95);
+padding:35px 25px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.25);
+text-align:center;
+width:320px;
+backdrop-filter: blur(10px);
+animation: fadeIn 0.8s ease-in-out;
+}
+
+/* ===== INPUT ===== */
+input{
+width:90%;
+padding:12px;
+margin:10px 0;
+border-radius:10px;
+border:1px solid #ccc;
+outline:none;
+}
+
+/* ===== BUTTON ===== */
+button{
+padding:10px;
+margin:10px 5px;
+width:120px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+color:white;
+background: linear-gradient(135deg,#007bff,#00c6ff);
+transition:0.3s;
+}
+
+button:hover{
+transform: scale(1.05);
+}
+
+/* ===== SHOW PASSWORD ===== */
+.show-pass{
+font-size:13px;
+cursor:pointer;
+color:#007bff;
+}
+
+/* ===== LOADER ===== */
+.loader{
+display:none;
+margin-top:10px;
+}
+
+.loader div{
+width:20px;
+height:20px;
+border:3px solid #ccc;
+border-top:3px solid #007bff;
+border-radius:50%;
+animation: spin 1s linear infinite;
+margin:auto;
+}
+
+@keyframes spin{
+100%{ transform: rotate(360deg); }
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>Expense Tracker Login</h2>
+
+<input id="username" placeholder="Username">
+
+<input id="password" type="password" placeholder="Password">
+
+<br>
+
+<!-- ✅ SHOW PASSWORD -->
+<span class="show-pass" onclick="togglePassword()">👁 Show Password</span>
+
+<br>
+
+<button type="button" onclick="handleLogin()">Login</button>
+<button type="button" onclick="register()">Register</button>
+
+<!-- ✅ LOADER -->
+<div class="loader" id="loader">
+<div></div>
+<p>Logging in...</p>
+</div>
+
+</div>
+
+<script>
+
+// ===== SHOW / HIDE PASSWORD =====
+function togglePassword(){
+let pass = document.getElementById("password");
+
+if(pass.type === "password"){
+pass.type = "text";
+}else{
+pass.type = "password";
+}
+}
+
+// ===== LOGIN WITH LOADER =====
+function handleLogin(){
+
+document.getElementById("loader").style.display = "block";
+
+// small delay for effect
+setTimeout(()=>{
+login(); // existing function
+},1000);
+
+}
+
+</script>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

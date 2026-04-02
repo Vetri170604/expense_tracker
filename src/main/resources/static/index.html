@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+
+<title>Smart Expense Tracker</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<!-- ✅ NEW: PDF direct download -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<!-- <style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#f5f5f5;
+transition:0.3s;
+}
+
+.dark{
+background:#121212;
+color:white;
+}
+
+header{
+background:#4CAF50;
+color:white;
+display:flex;
+justify-content:space-between;
+padding:15px;
+}
+
+.container{
+padding:20px;
+}
+
+.cards{
+display:flex;
+gap:20px;
+justify-content:center;
+flex-wrap:wrap;
+margin-bottom:20px;
+}
+
+.card{
+background:white;
+padding:15px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+min-width:150px;
+text-align:center;
+}
+
+.dark .card{
+background:#1e1e1e;
+}
+
+.controls{
+text-align:center;
+margin-bottom:20px;
+}
+
+input,select,button{
+padding:8px;
+margin:5px;
+}
+
+.charts{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:40px;
+}
+
+canvas{
+max-width:600px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+th,td{
+border:1px solid #ccc;
+padding:8px;
+text-align:center;
+}
+
+button{
+cursor:pointer;
+}
+
+</style> -->
+
+</head>
+
+<body>
+
+<header>
+
+<h2>Expense Tracker</h2>
+
+<div>
+<button onclick="toggleDark()">Dark Mode</button>
+<button onclick="logout()">Logout</button>
+</div>
+
+</header>
+
+<div class="container">
+
+<h3 id="welcome"></h3>
+
+<div class="cards">
+
+<div class="card">
+<h4>Balance</h4>
+<h2 id="balance">0</h2>
+</div>
+
+<div class="card">
+<h4>Total Expense</h4>
+<h2 id="expenseTotal">0</h2>
+</div>
+
+<div class="card">
+<h4>Savings</h4>
+<h2 id="saving">0</h2>
+</div>
+
+<div class="card">
+<h4>Debt</h4>
+<h2 id="debt">0</h2>
+</div>
+
+</div>
+
+<div class="controls">
+
+<input id="expenseName" placeholder="Expense Name">
+
+<input id="amount" type="number" placeholder="Amount">
+
+<select id="category">
+<option>Food</option>
+<option>Medical</option>
+<option>Education</option>
+<option>Transport</option>
+<option>Shopping</option>
+<option>Bills</option>
+<option>Entertainment</option>
+<option>Others</option>
+</select>
+
+<select id="payment">
+<option>Cash</option>
+<option>UPI</option>
+<option>Card</option>
+</select>
+
+<button onclick="addExpense()">Add Expense</button>
+
+<p id="limitMessage"></p>
+<p id="aiSuggestion"></p>
+
+</div>
+
+<div class="charts">
+
+<canvas id="pieChart"></canvas>
+<canvas id="monthlyChart"></canvas>
+
+</div>
+
+<h3>AI Analysis</h3>
+
+<p>Prediction: <span id="prediction"></span></p>
+<p>Financial Health Score: <span id="healthScore"></span></p>
+
+<!-- ✅ NEW: MONTH FILTER -->
+<div style="text-align:center; margin-top:20px;">
+<label>Select Month:</label>
+<input type="month" id="monthFilter">
+</div>
+
+<!-- ✅ REPORT BUTTONS -->
+<div style="text-align:center; margin-top:10px;">
+<button onclick="generateReport()">Generate Report</button>
+<button onclick="downloadExcel()">Excel</button>
+<button onclick="downloadPDF()">PDF</button>
+</div>
+
+<!-- ✅ REPORT OUTPUT -->
+<div id="reportOutput" style="margin-top:20px;"></div>
+
+<h3>Expense List</h3>
+
+<table>
+
+<thead>
+<tr>
+<th>Name</th>
+<th>Amount</th>
+<th>Category</th>
+<th>Payment</th>
+<th>Date</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="expenseList"></tbody>
+
+</table>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
